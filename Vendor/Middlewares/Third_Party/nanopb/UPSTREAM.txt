@@ -1,0 +1,5 @@
+Nanopb 0.4.9.1
+Source: https://github.com/nanopb/nanopb/tree/0.4.9.1
+Archive: https://codeload.github.com/nanopb/nanopb/tar.gz/refs/tags/0.4.9.1
+Archive SHA256: 4575944a468718ef25f05eb01d994364650b581563089a9841986bb1e460eac3
+Runtime and generator copied without modifications; upstream examples and tests omitted.

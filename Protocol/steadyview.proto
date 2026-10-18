@@ -1,0 +1,109 @@
+syntax = "proto3";
+package steadyview;
+
+enum VideoModeKind { MIX = 0; DIVERSITY = 1; }
+enum Status {
+  OK = 0;
+  MALFORMED_PACKET = 1;
+  UNKNOWN_PROPERTY = 2;
+  INVALID_VALUE = 3;
+  READ_ONLY = 4;
+  IO_ERROR = 5;
+  NOT_INITIALIZED = 6;
+  STORAGE_ERROR = 7;
+  NO_SAVED_SETTINGS = 8;
+  AUTH_REQUIRED = 9;
+  AUTH_FAILED = 10;
+}
+// SetProp requires value; GetProp uses the same message with value absent.
+// ChannelIndex: 0..47, bands A/B/E/F/R/L. Registers: 20-bit unsigned values.
+// FrequencyMHz and StateRegister are read-only. Initialize(true) resets to A1/Mix.
+message ChannelIndex { optional uint32 value = 1; }
+message VideoMode { optional VideoModeKind value = 1; }
+message FrequencyMHz { optional uint32 value = 1; }
+message Initialize { optional bool value = 1; }
+message SynthesizerRegA { optional uint32 value = 1; }
+message SynthesizerRegB { optional uint32 value = 1; }
+message SynthesizerRegC { optional uint32 value = 1; }
+message SynthesizerRegD { optional uint32 value = 1; }
+message VcoSwitchCapControl { optional uint32 value = 1; }
+message DfcControl { optional uint32 value = 1; }
+message SixMAudioDemodulatorControl { optional uint32 value = 1; }
+message SixM5AudioDemodulatorControl { optional uint32 value = 1; }
+message ReceiverControl1 { optional uint32 value = 1; }
+message ReceiverControl2 { optional uint32 value = 1; }
+message PowerDownControl { optional uint32 value = 1; }
+message StateRegister { optional uint32 value = 1; }
+
+message Property {
+  oneof kind {
+    ChannelIndex channel_index = 1;
+    VideoMode video_mode = 2;
+    FrequencyMHz frequency_mhz = 3;
+    Initialize initialize = 4;
+    SynthesizerRegA synthesizer_reg_a = 16;
+    SynthesizerRegB synthesizer_reg_b = 17;
+    SynthesizerRegC synthesizer_reg_c = 18;
+    SynthesizerRegD synthesizer_reg_d = 19;
+    VcoSwitchCapControl vco_switch_cap_control = 20;
+    DfcControl dfc_control = 21;
+    SixMAudioDemodulatorControl six_m_audio_demodulator_control = 22;
+    SixM5AudioDemodulatorControl six_m5_audio_demodulator_control = 23;
+    ReceiverControl1 receiver_control_1 = 24;
+    ReceiverControl2 receiver_control_2 = 25;
+    PowerDownControl power_down_control = 26;
+    StateRegister state_register = 31;
+  }
+}
+message SetProp { Property property = 1; }
+message GetProp { Property property = 1; }
+message GetState {}
+message SaveSettings {}
+message GetSettingsInfo {}
+message GetAuth {}
+message Authenticate { bytes proof = 1; }
+// Initially key is PBKDF2 output; for rotation XOR it with HMAC(key, "SV-KEY-v1" || challenge).
+message SetPassphrase { bytes key = 1; }
+message SecureCommand { bytes payload = 1; bytes mac = 2; fixed32 sequence = 3; }
+message AuthState {
+  bool configured = 1;
+  bool authorized = 2;
+  bytes salt = 3;
+  bytes challenge = 4;
+  uint32 iterations = 5;
+}
+message Request {
+  fixed32 request_id = 1;
+  oneof command {
+    SetProp set_prop = 2;
+    GetProp get_prop = 3;
+    GetState get_state = 4;
+    SaveSettings save_settings = 5;
+    GetSettingsInfo get_settings_info = 6;
+    GetAuth get_auth = 7;
+    Authenticate authenticate = 8;
+    SetPassphrase set_passphrase = 9;
+    SecureCommand secure_command = 10;
+  }
+}
+message PropertyResult { Status status = 1; Property property = 2; }
+message SettingsInfo {
+  bool saved = 1;
+  bool dirty = 2;
+  fixed32 revision = 3;
+  Status restore_status = 4;
+}
+message ReceiverState {
+  repeated PropertyResult properties = 1;
+  SettingsInfo settings = 2;
+}
+message Response {
+  fixed32 request_id = 1;
+  Status status = 2;
+  oneof result {
+    PropertyResult property = 3;
+    ReceiverState state = 4;
+    SettingsInfo settings = 5;
+    AuthState auth = 6;
+  }
+}

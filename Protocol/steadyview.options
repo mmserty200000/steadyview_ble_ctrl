@@ -1,0 +1,7 @@
+steadyview.ReceiverState.properties max_count:16
+steadyview.Authenticate.proof max_size:32
+steadyview.SetPassphrase.key max_size:32
+steadyview.SecureCommand.payload max_size:64
+steadyview.SecureCommand.mac max_size:32
+steadyview.AuthState.salt max_size:16
+steadyview.AuthState.challenge max_size:32

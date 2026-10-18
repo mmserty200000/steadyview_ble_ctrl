@@ -1,8 +1,0 @@
-[ProjectFiles]
-HeaderPath=
-[Others]
-Define=
-HALModule=TIM
-[Groups]
-Application/User=../Src/main.c;../Src/stm32wbxx_it.c;../Src/stm32wbxx_hal_timebase_tim.c;../Src/app_freertos.c;../Src/stm32wbxx_hal_msp.c;
-Doc=../readme.txt;

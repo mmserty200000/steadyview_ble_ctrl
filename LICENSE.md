@@ -21,3 +21,8 @@
 | Azure RTOS ThreadX              | Microsoft Corporation              | Microsoft Software License for Azure RTOS |
 | STM32 Projects                  | STMicroelectronics                 | SLA0044                                   |
 | STM32 Utilities                 | STMicroelectronics                 | BSD-3-Clause                              |
+
+SteadyView adaptation (`Core/Src/steadyview.c`): ExpressLRS/Backpack, GPL-3.0, see `LICENSES/Backpack-GPL-3.0.txt`.
+Nanopb: see `Vendor/Middlewares/Third_Party/nanopb/LICENSE.txt`.
+
+TinyCrypt v0.2.8 (SHA-256/HMAC/utils): Intel, BSD-3-Clause; see Vendor/Middlewares/Third_Party/tinycrypt/LICENSE.

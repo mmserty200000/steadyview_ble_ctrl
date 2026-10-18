@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Локальный Bluetooth-пульт приёмника SteadyView: каналы, режимы и настройки.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>SteadyView · Пульт приёмника</title>
+<link rel="stylesheet" href="style.css"><script type="module" src="app.mjs"></script>
+</head>
+<body>
+<div class="shell">
+<header><a class="brand" href="./" aria-label="SteadyView, главная"><span class="brandmark">≋</span> STEADYVIEW<span class="edition">CONTROL / 01</span></a><span id="connection" class="pill">● Не подключён</span></header>
+<main>
+<section class="intro"><div><div class="eyebrow">5.8 GHZ · VIDEO RECEIVER</div><h1>Твой канал.<br><span>Под контролем.</span></h1><p>Настрой приёмник прямо из браузера.<br>Подключение по Bluetooth, настройки — в его памяти.</p></div><div class="connect-card"><span class="eyebrow">ПРИЁМНИК</span><h2 id="device-name">SteadyView</h2><p id="device-hint">Включи приёмник и выбери его в списке.</p><div class="actions"><button id="connect" class="primary">Найти приёмник <span>↗</span></button><button id="reconnect" hidden>Подключить снова</button><button id="disconnect" hidden>Отключить</button></div><small>Поиск по уникальному BLE-сервису</small></div></section>
+<div id="notice" class="notice" role="status" aria-live="polite">Подключи приёмник, чтобы загрузить его состояние.</div>
+<section id="auth-card" class="panel auth" hidden><div><div class="eyebrow">ДОСТУП</div><h2 id="auth-title">Вход по пассфразе</h2><p id="auth-hint">Введи пассфразу этого приёмника.</p></div><form id="auth-form"><label for="passphrase">Пассфраза</label><input id="passphrase" type="password" autocomplete="current-password" maxlength="128" required><div id="confirm-row" hidden><label for="confirm">Повтори пассфразу</label><input id="confirm" type="password" autocomplete="new-password" maxlength="128"></div><label class="check"><input id="remember" type="checkbox" checked> Запомнить на этом устройстве</label><small>Ключ останется в этом браузере. Используй только на своём устройстве.</small><button id="unlock" type="submit" class="primary">Войти</button></form></section>
+<fieldset id="controls" disabled>
+<div class="dashboard">
+<section class="panel tuning"><div class="panel-heading"><h2>Частота и канал</h2><span class="eyebrow">01 / TUNING</span></div><div class="frequency"><span id="frequency">—</span><span class="unit">MHz</span><span id="channel-label" class="channel-badge">—</span></div><p class="muted" id="frequency-hint">Состояние появится после подключения</p><label>Диапазон</label><div id="bands" class="bands" role="group" aria-label="Диапазон"></div><label>Канал</label><div id="channels" class="channels" role="group" aria-label="Канал"></div></section>
+<section class="panel mode"><div class="panel-heading"><h2>Режим приёма</h2><span class="eyebrow">02 / MODE</span></div><div class="mode-options"><button class="mode-button" id="mix" aria-pressed="false"><span class="mode-icon">≋</span><span><strong>Mix</strong><small>Смешивание видеосигналов</small></span><span class="radio"></span></button><button class="mode-button" id="diversity" aria-pressed="false"><span class="mode-icon">⇄</span><span><strong>Diversity</strong><small>Выбор сигнала антенны</small></span><span class="radio"></span></button></div><div class="storage"><span id="saved-led" class="dot"></span><div><strong id="saved-title">Память приёмника</strong><small id="saved-info">Настройки пока не прочитаны</small></div></div><div class="actions"><button id="refresh">↻ Обновить всё</button><button id="save">Сохранить</button></div></section>
+</div>
+<details class="panel advanced"><summary><span>Регистры и обслуживание</span><span class="muted">Расширенные настройки</span></summary><p class="muted">Прямая запись регистров может сделать канал или режим неопределённым. Значения — 20 бит, в hex.</p><div class="table-scroll"><table><thead><tr><th>Регистр</th><th>Значение</th><th>Действие</th></tr></thead><tbody id="registers"></tbody></table></div><button id="initialize">Сбросить приёмник на A1 / Mix</button><small>Пассфраза останется прежней.</small></details>
+<section class="panel access"><div><h2>Доступ к приёмнику</h2><p class="muted">Смена пассфразы отключит ранее сохранённые ключи.</p></div><div class="actions"><button id="change-passphrase">Сменить пассфразу</button><button id="forget">Забыть ключ и отключиться</button></div></section>
+</fieldset>
+</main>
+<footer><span>STEADYVIEW <span class="muted">/ WIRELESS CONTROL</span></span><span>Команды идут напрямую по BLE</span></footer>
+</div>
+</body></html>

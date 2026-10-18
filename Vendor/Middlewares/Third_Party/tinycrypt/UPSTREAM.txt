@@ -1,0 +1,11 @@
+Source: https://github.com/intel/tinycrypt/tree/v0.2.8
+Vendored SHA-256, HMAC and utils only. BSD-3-Clause; see LICENSE.
+SHA256:
+b2d451fcba3577b118741d733d37ebd15bdd0b6b381e554a7345bdbfa3743108  LICENSE
+89c80a6d5f468ebde82fb525a6dd72685cb27720fd385da6e3f3f2a19fba48ec  lib/include/tinycrypt/constants.h
+c981663602ae9c4df8f7c2fe5d6e1d2cb1132fc0b90beb4e4eef536d9f54b82b  lib/include/tinycrypt/hmac.h
+90eb15d8cd82f81ba163c53b199c04eb9e5fda52a41901bb380dd80097f57902  lib/include/tinycrypt/sha256.h
+c5c169e0ae15e394588d7d6797a28af9ab251b1ed1169b3207625752d8d8fc8a  lib/include/tinycrypt/utils.h
+6c9141de8af68822f611b4213801eda5a8695ece071b3bef34dbb6e52ffdd709  lib/source/hmac.c
+a8ad4bb2c09e31e4ab86c1b4f8fa073937a42e2694afb4dde6cb1b3c7a4b5ffd  lib/source/sha256.c
+5039b34c8e912927d8fea4fbadc65d8d8c7a80707e21494dc79da99f64ebe0da  lib/source/utils.c
